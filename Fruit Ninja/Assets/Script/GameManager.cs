@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 	public GameObject fruitPrefab;
 
 	private float lastSpawn;
-	private float deltaSpawn = 2.0f;
+	private float deltaSpawn = 1.0f;
 
 	private Fruit GetFruit()
 	{
