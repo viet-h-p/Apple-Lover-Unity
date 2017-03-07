@@ -32,9 +32,9 @@ public class GameManager : MonoBehaviour
 		if (Time.time - lastSpawn > deltaSpawn)
 		{
 			Fruit f = GetFruit();
-			float randomX = Random.Range(-1.5f, 1.5f);
+			float randomX = Random.Range(-1.65f, 1.65f);
 
-			f.LaunchFruit(Random.Range(1.5f, 3.0f), randomX, -randomX);
+			f.LaunchFruit(Random.Range(1.85f, 2.75f), randomX, -randomX);
 			// A fruit is randomly spawn on the left or right or the middle of the screen
 			// if left throw to the right, right throw to the left, and middle straight up  
 
