@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 	private float lastSpawn;
 	private float deltaSpawn = 1.0f;
 
+	public Transform trail;
+
 	private Fruit GetFruit()
 	{
 		Fruit f = fruit.Find(x => !x.IsActive); // find the false IsActive fruit
@@ -40,5 +42,12 @@ public class GameManager : MonoBehaviour
 
 			lastSpawn = Time.time;
 		}	
+
+		if (Input.GetMouseButton(0))
+		{
+			Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition); //return a vector3
+			pos.z = -1;
+			trail.position = pos;
+		}
 	}
 }
