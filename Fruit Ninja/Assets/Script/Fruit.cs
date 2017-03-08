@@ -7,11 +7,7 @@ public class Fruit : MonoBehaviour
 
 	private float verticalVelocity;
 	private float speed;
-
-	private void Start()
-	{
-		LaunchFruit(2.0f, 1, -1);
-	}
+	private bool isSliced;
 
 	public void LaunchFruit(float verticalVelocity, float xSpeed, float xStart)
 	{
@@ -19,6 +15,7 @@ public class Fruit : MonoBehaviour
 		speed = xSpeed;
 		this.verticalVelocity = verticalVelocity;
 		transform.position = new Vector3(xStart, 0, 0);
+		isSliced = false;
 	}
 
 	private void Update()
@@ -34,10 +31,13 @@ public class Fruit : MonoBehaviour
 
 	public void Slice()
 	{
+		if (isSliced) return;
+		
 		if (verticalVelocity < 0.5f)
 			verticalVelocity = 0.5f;
 
 		speed *= 0.5f;
+		isSliced = true;
 	}
 
 }
