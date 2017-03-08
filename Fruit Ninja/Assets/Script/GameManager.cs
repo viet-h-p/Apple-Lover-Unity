@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
 					{
 						if (c2 == fruitCols[i])
 						{
-							Debug.Log("Sliced " + c2.name);
+							c2.GetComponent<Fruit>().Slice();
 						}
 					}
 				}
