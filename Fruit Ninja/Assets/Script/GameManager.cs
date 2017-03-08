@@ -1,9 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour 
 {
+	private const float REQUIRED_SLICEFORCE = 400.0f;
+
 	private List<Fruit> fruit = new List<Fruit>();
 	public GameObject fruitPrefab;
 
@@ -12,7 +13,13 @@ public class GameManager : MonoBehaviour
 
 	public Transform trail;
 
-	private Collider2D[] fruitsCols;
+	private Vector3 lastMousePos;
+	private Collider2D[] fruitCols = new Collider2D[0];
+
+	private void Start()
+	{
+		
+	}
 
 	private Fruit GetFruit()
 	{
@@ -47,9 +54,23 @@ public class GameManager : MonoBehaviour
 			pos.z = -1;
 			trail.position = pos;
 
-			fruitsCols = Physics2D.OverlapPointAll(new Vector2(pos.x, pos.y), LayerMask.GetMask("Fruit"));
-			foreach (Collider2D c2 in fruitsCols)
-				Debug.Log(c2.name);
+			Collider2D[] thisFramesFruit = Physics2D.OverlapPointAll(new Vector2(pos.x, pos.y), LayerMask.GetMask("Fruit"));
+			
+			if((Input.mousePosition - lastMousePos).sqrMagnitude > REQUIRED_SLICEFORCE)
+			{
+				foreach (Collider2D c2 in thisFramesFruit)
+				{
+					for (int i = 0; i < fruitCols.Length; i++)
+					{
+						if (c2 == fruitCols[i])
+						{
+							Debug.Log("Sliced " + c2.name);
+						}
+					}
+				}
+			}
+			lastMousePos = Input.mousePosition;
+			fruitCols = thisFramesFruit;
 		}
 	}
 }
