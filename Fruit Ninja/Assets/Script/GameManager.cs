@@ -1,24 +1,44 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour 
 {
+	public static GameManager Instance {set; get;}
+
 	private const float REQUIRED_SLICEFORCE = 400.0f;
 
-	private List<Fruit> fruit = new List<Fruit>();
 	public GameObject fruitPrefab;
-
-	private float lastSpawn;
-	private float deltaSpawn = 1.0f;
-
 	public Transform trail;
 
+	private List<Fruit> fruit = new List<Fruit>();
+	private float lastSpawn;
+	private float deltaSpawn = 1.0f;
 	private Vector3 lastMousePos;
 	private Collider2D[] fruitCols = new Collider2D[0];
 
+	// UI 
+	private int score;
+	private int highscore;
+	private int lifepoint;
+	public Text scoreText;
+	public Text highscoreText;
+	public Image[] lifepoints;
+
+	private void Awake()
+	{
+		Instance = this;
+	}	
+
 	private void Start()
 	{
-		
+		NewGame();
+	}
+	
+	private void NewGame()
+	{
+		score = 0;
+		lifepoint = 3;
 	}
 
 	private Fruit GetFruit()
@@ -73,4 +93,17 @@ public class GameManager : MonoBehaviour
 			fruitCols = thisFramesFruit;
 		}
 	}
+
+	public void LoseLifepoint()
+	{
+		lifepoint--;
+		lifepoints[lifepoint].enabled = false;
+		if (lifepoint < 0)
+			Death();
+	}
+
+	public void Death()
+    {
+        
+    }
 }

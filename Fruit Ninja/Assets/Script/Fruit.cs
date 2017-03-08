@@ -26,7 +26,11 @@ public class Fruit : MonoBehaviour
 		transform.position += new Vector3(speed, verticalVelocity, 0) * Time.deltaTime;
 
 		if (transform.position.y < -1)
+		{
 			IsActive = false; 
+			if (!isSliced)
+				GameManager.Instance.LoseLifepoint();
+		}
 	}
 
 	public void Slice()
