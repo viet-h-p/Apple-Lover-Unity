@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
 
 	public Transform trail;
 
+	private Collider2D[] fruitsCols;
+
 	private Fruit GetFruit()
 	{
 		Fruit f = fruit.Find(x => !x.IsActive); // find the false IsActive fruit
@@ -23,10 +25,6 @@ public class GameManager : MonoBehaviour
 		}
 
 		return f;
-	}
-
-	void Start () {
-		
 	}
 	
 	private void Update () 
@@ -48,6 +46,10 @@ public class GameManager : MonoBehaviour
 			Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition); //return a vector3
 			pos.z = -1;
 			trail.position = pos;
+
+			fruitsCols = Physics2D.OverlapPointAll(new Vector2(pos.x, pos.y), LayerMask.GetMask("Fruit"));
+			foreach (Collider2D c2 in fruitsCols)
+				Debug.Log(c2.name);
 		}
 	}
 }
