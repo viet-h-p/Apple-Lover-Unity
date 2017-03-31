@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
 	private void NewGame()
 	{
 		score = 0;
+		scoreText.text = score.ToString();
 		lifepoint = 3;
 	}
 
@@ -94,14 +95,28 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
+	public void IncrementScore(int scoreAmount)
+	{
+		score += scoreAmount; 
+		scoreText.text = score.ToString();
+
+		if(score > highscore)
+		{
+			highscore = score;
+			highscoreText.text = "BEST: " + highscore.ToString();
+		}
+	}
+
 	public void LoseLifepoint()
 	{
-		if (lifepoint <= 0) return;
+		if (lifepoint <= 0)
+		{
+			Death();
+			return;
+		}
 
 		lifepoint--;
 		lifepoints[lifepoint].enabled = false;
-		if (lifepoint <= 0)
-			Death();
 	}
 
 	public void Death()

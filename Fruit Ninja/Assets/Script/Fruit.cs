@@ -42,6 +42,8 @@ public class Fruit : MonoBehaviour
 
 		speed *= 0.5f;
 		isSliced = true;
+
+		GameManager.Instance.IncrementScore(1);
 	}
 
 }
