@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 	public Transform trail;
 
 	private bool isPaused;
-	private List<Fruit> fruit = new List<Fruit>();
+	private List<Fruit> fruits = new List<Fruit>();
 	private float lastSpawn;
 	private float deltaSpawn = 1.0f;
 	private Vector3 lastMousePos;
@@ -48,17 +48,25 @@ public class GameManager : MonoBehaviour
 		pauseMenu.SetActive(false);
 		Time.timeScale = 1;
 		isPaused = false;
+
+		foreach (Image life in lifepoints)
+			life.enabled = true;
+
+		foreach (Fruit f in fruits)
+			Destroy(f.gameObject);
+		fruits.Clear();
+
 		deathMenu.SetActive(false);
 	}
 
 	private Fruit GetFruit()
 	{
-		Fruit f = fruit.Find(x => !x.IsActive); // find the false IsActive fruit
+		Fruit f = fruits.Find(x => !x.IsActive); // find the false IsActive fruit
 
 		if (f == null)
 		{
 			f = Instantiate(fruitPrefab).GetComponent<Fruit>();
-			fruit.Add(f);
+			fruits.Add(f);
 		}
 
 		return f;
@@ -121,14 +129,13 @@ public class GameManager : MonoBehaviour
 
 	public void LoseLifepoint()
 	{
-		if (lifepoint <= 0)
-		{
-			Death();
-			return;
-		}
-
+		if (lifepoint == 0) return;
+		
 		lifepoint--;
 		lifepoints[lifepoint].enabled = false;
+	
+		if (lifepoint == 0)
+			Death();
 	}
 
 	public void Death()
