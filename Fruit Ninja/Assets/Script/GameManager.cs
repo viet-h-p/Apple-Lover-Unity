@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
 	public Text scoreText;
 	public Text highscoreText;
 	public Image[] lifepoints;
+	public GameObject pauseMenu;
 
 	private void Awake()
 	{
@@ -37,9 +38,11 @@ public class GameManager : MonoBehaviour
 	
 	private void NewGame()
 	{
+		lifepoint = 3;
 		score = 0;
 		scoreText.text = score.ToString();
-		lifepoint = 3;
+		pauseMenu.SetActive(false);
+		Time.timeScale = 1;
 	}
 
 	private Fruit GetFruit()
@@ -123,4 +126,10 @@ public class GameManager : MonoBehaviour
     {
         Debug.LogWarning("You are death");
     }
+
+	public void PauseGame()
+	{
+		pauseMenu.SetActive(!pauseMenu.activeSelf);
+		Time.timeScale = (Time.timeScale == 0) ? 1 : 0;
+	}
 }
