@@ -96,14 +96,16 @@ public class GameManager : MonoBehaviour
 
 	public void LoseLifepoint()
 	{
+		if (lifepoint <= 0) return;
+
 		lifepoint--;
 		lifepoints[lifepoint].enabled = false;
-		if (lifepoint < 0)
+		if (lifepoint <= 0)
 			Death();
 	}
 
 	public void Death()
     {
-        
+        Debug.LogWarning("You are death");
     }
 }
