@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 	public GameObject fruitPrefab;
 	public Transform trail;
 
+	private bool isPaused;
 	private List<Fruit> fruit = new List<Fruit>();
 	private float lastSpawn;
 	private float deltaSpawn = 1.0f;
@@ -43,6 +44,7 @@ public class GameManager : MonoBehaviour
 		scoreText.text = score.ToString();
 		pauseMenu.SetActive(false);
 		Time.timeScale = 1;
+		isPaused = false;
 	}
 
 	private Fruit GetFruit()
@@ -60,6 +62,8 @@ public class GameManager : MonoBehaviour
 	
 	private void Update () 
 	{
+		if (isPaused) return;
+		
 		if (Time.time - lastSpawn > deltaSpawn)
 		{
 			Fruit f = GetFruit();
@@ -130,6 +134,7 @@ public class GameManager : MonoBehaviour
 	public void PauseGame()
 	{
 		pauseMenu.SetActive(!pauseMenu.activeSelf);
+		isPaused = pauseMenu.activeSelf;
 		Time.timeScale = (Time.timeScale == 0) ? 1 : 0;
 	}
 }
