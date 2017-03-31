@@ -42,6 +42,8 @@ public class GameManager : MonoBehaviour
 		lifepoint = 3;
 		score = 0;
 		scoreText.text = score.ToString();
+		highscore = PlayerPrefs.GetInt("Score");
+		highscoreText.text = "BEST: " + highscore.ToString();
 		pauseMenu.SetActive(false);
 		Time.timeScale = 1;
 		isPaused = false;
@@ -63,7 +65,7 @@ public class GameManager : MonoBehaviour
 	private void Update () 
 	{
 		if (isPaused) return;
-		
+
 		if (Time.time - lastSpawn > deltaSpawn)
 		{
 			Fruit f = GetFruit();
@@ -111,6 +113,7 @@ public class GameManager : MonoBehaviour
 		{
 			highscore = score;
 			highscoreText.text = "BEST: " + highscore.ToString();
+			PlayerPrefs.SetInt("Score", highscore);
 		}
 	}
 
