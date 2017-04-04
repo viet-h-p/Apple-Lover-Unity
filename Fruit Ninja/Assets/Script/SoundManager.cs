@@ -21,7 +21,7 @@ public class SoundManager : MonoBehaviour
 
 	public void PlaySound(int soundIndex)
 	{
-		// source.Play();
+		AudioSource.PlayClipAtPoint(allSounds[soundIndex], transform.position);
 	}
 
 }

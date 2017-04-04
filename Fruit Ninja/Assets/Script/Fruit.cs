@@ -15,6 +15,7 @@ public class Fruit : MonoBehaviour
 	private int spriteIndex;
 	private float lastSpriteUpdate;
 	private float spriteUpdateDelta = 0.2f;
+	private float rotationSpeed;
 
 	public void LaunchFruit(float verticalVelocity, float xSpeed, float xStart)
 	{
@@ -22,6 +23,7 @@ public class Fruit : MonoBehaviour
 		speed = xSpeed;
 		this.verticalVelocity = verticalVelocity;
 		transform.position = new Vector3(xStart, 0, 0);
+		rotationSpeed = Random.Range(30, 180);
 		isSliced = false;
 		spriteIndex = 0;
 		spriteRenderer.sprite = sprites[spriteIndex];
@@ -33,6 +35,7 @@ public class Fruit : MonoBehaviour
 
 		verticalVelocity -= GRAVITY * Time.deltaTime;
 		transform.position += new Vector3(speed, verticalVelocity, 0) * Time.deltaTime;
+		transform.Rotate(new Vector3(0, 0, rotationSpeed) * Time.deltaTime);
 
 		if (isSliced)
 		{
