@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SoundManager : MonoBehaviour 
 {
@@ -10,12 +11,17 @@ public class SoundManager : MonoBehaviour
 	private void Awake () 
 	{
 		Instance = this;	
-		DontDestroyOnLoad(gameObject);
 	}
-	
+
+	private void Start()
+	{
+		DontDestroyOnLoad(gameObject);
+		SceneManager.LoadScene("Menu");
+	}
+
 	public void PlaySound(int soundIndex)
 	{
-		source.Play();
+		// source.Play();
 	}
 
 }
