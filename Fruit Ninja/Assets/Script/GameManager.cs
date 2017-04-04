@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour 
@@ -149,5 +150,10 @@ public class GameManager : MonoBehaviour
 		pauseMenu.SetActive(!pauseMenu.activeSelf);
 		isPaused = pauseMenu.activeSelf;
 		Time.timeScale = (Time.timeScale == 0) ? 1 : 0;
+	}
+
+	public void ToMenu()
+	{
+		SceneManager.LoadScene("Menu");
 	}
 }
