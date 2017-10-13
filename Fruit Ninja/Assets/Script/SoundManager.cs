@@ -5,8 +5,8 @@ public class SoundManager : MonoBehaviour
 {
 	public static SoundManager Instance { set; get; }
 
-	public AudioSource source;
-	public AudioClip[] allSounds;
+	//public AudioSource source;
+	//public AudioClip[] allSounds;
 
 	private void Awake () 
 	{
@@ -15,13 +15,13 @@ public class SoundManager : MonoBehaviour
 
 	private void Start()
 	{
-		DontDestroyOnLoad(gameObject);
+		//DontDestroyOnLoad(gameObject);
 		SceneManager.LoadScene("Menu");
 	}
 
-	public void PlaySound(int soundIndex)
-	{
-		AudioSource.PlayClipAtPoint(allSounds[soundIndex], transform.position);
-	}
+	//public void PlaySound(int soundIndex)
+	//{
+	//	AudioSource.PlayClipAtPoint(allSounds[soundIndex], transform.position);
+	//}
 
 }

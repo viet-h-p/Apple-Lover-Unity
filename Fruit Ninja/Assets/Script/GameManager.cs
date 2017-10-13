@@ -36,12 +36,13 @@ public class GameManager : MonoBehaviour
 
 	private void Start()
 	{
+        //PlayerPrefs.DeleteAll();
 		NewGame();
 	}
 	
 	public void NewGame()
 	{
-		SoundManager.Instance.PlaySound(0);
+		//SoundManager.Instance.PlaySound(0);
 		lifepoint = 3;
 		score = 0;
 		scoreText.text = score.ToString();
@@ -148,10 +149,10 @@ public class GameManager : MonoBehaviour
 
 	public void PauseGame()
 	{
-		SoundManager.Instance.PlaySound(1);
+		//SoundManager.Instance.PlaySound(1);
 		pauseMenu.SetActive(!pauseMenu.activeSelf);
 		isPaused = pauseMenu.activeSelf;
-		Time.timeScale = (Time.timeScale == 0) ? 1 : 0;
+        Time.timeScale = Mathf.Approximately(Time.timeScale, 0) ? 1 : 0;
 	}
 
 	public void ToMenu()
